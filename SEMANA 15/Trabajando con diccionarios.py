@@ -1,23 +1,44 @@
-# Crear un diccionario llamado informacion_personal
-informacion_personal = {
-    "nombre": "Tatiana Aguilar",
-    "edad": 20,
-    "ciudad": "Aatuntaqui",
-    "profesion": "Estudiante"
-}
+## --- Programación Tradicional para el Promedio Semanal del Clima ---
 
-# Acceder y modificar el valor de la clave "ciudad"
-informacion_personal["ciudad"] = "Atuntaqui"
+def obtener_temperaturas_diarias():
+    """
+    Solicita al usuario las temperaturas para cada día de la semana.
+    Retorna una lista de flotantes con las temperaturas.
+    """
+    temperaturas = []
+    dias_semana = ["lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo"]
+    print("Ingrese la temperatura para cada día de la semana:")
+    for dia in dias_semana:
+        while True:
+            try:
+                temp = float(input(f"Temperatura del {dia}: "))
+                temperaturas.append(temp)
+                break
+            except ValueError:
+                print("Entrada inválida. Por favor, ingrese un número.")
+    return temperaturas
 
-# Agregar una nueva clave-valor al diccionario
-informacion_personal["profesion"] = "Desarrolladora de Software"
+def calcular_promedio_semanal(temperaturas):
+    """
+    Calcula el promedio de una lista de temperaturas.
+    Parámetros:
+        temperaturas (list): Una lista de números flotantes.
+    Retorna:
+        float: El promedio de las temperaturas.
+    """
+    if not temperaturas:
+        return 0.0  # Retorna 0 si la lista está vacía para evitar división por cero
+    return sum(temperaturas) / len(temperaturas)
 
-# Verificar si la clave "telefono" existe en el diccionario
-if "telefono" not in informacion_personal:
-    informacion_personal["telefono"] = "123-456-7890"
+def main_tradicional():
+    """
+    Función principal para ejecutar el programa en el enfoque tradicional.
+    """
+    print("--- Cálculo del Promedio Semanal del Clima (Programación Tradicional) ---")
+    temps = obtener_temperaturas_diarias()
+    promedio = calcular_promedio_semanal(temps)
+    print(f"\nLas temperaturas diarias ingresadas fueron: {temps}")
+    print(f"El promedio semanal de la temperatura es: {promedio:.2f}°C")
 
-# Eliminar la clave "edad" del diccionario
-del informacion_personal["edad"]
-
-# Imprimir el diccionario final
-print(informacion_personal)
+if __name__ == "__main__":
+    main_tradicional()
